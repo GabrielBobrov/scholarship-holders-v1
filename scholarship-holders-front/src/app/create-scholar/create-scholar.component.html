@@ -42,21 +42,24 @@
         <option value="PASSPORT">Passaporte</option>
       </select>
     </div>
-    <div class="form-group">
-      <label>Código do Banco:</label>
-      <input
-        type="text"
+    <div class="form-group mb-3">
+      <label for="bankCode">Código do Banco:</label>
+      <select
         [(ngModel)]="row.bankCode"
         name="bankCode"
+        id="bankCode"
         class="form-control"
         required
-      />
-      <div class="invalid-feedback">Por favor, preencha este campo.</div>
+      >
+        <option *ngFor="let bank of banks" [value]="bank.code">
+          {{ bank.code }} - {{ bank.name }}
+        </option>
+      </select>
     </div>
     <div class="form-group">
       <label>Agência do Banco:</label>
       <input
-        type="text"
+        type="number"
         [(ngModel)]="row.bankAgency"
         name="bankAgency"
         class="form-control"
@@ -67,7 +70,7 @@
     <div class="form-group">
       <label>Número da Conta:</label>
       <input
-        type="text"
+        type="number"
         [(ngModel)]="row.accountNumber"
         name="accountNumber"
         class="form-control"
@@ -75,6 +78,15 @@
       />
       <div class="invalid-feedback">Por favor, preencha este campo.</div>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!createForm.form.valid"
+    >
+      Salvar
+    </button>
   </form>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
 </div>

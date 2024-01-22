@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScholarDTO } from '../dtos/response/scholarDTO';
 import { ScholarService } from '../services/scholar.service';
@@ -8,21 +8,28 @@ import { ScholarService } from '../services/scholar.service';
   templateUrl: './create-scholar.component.html',
   styleUrls: ['./create-scholar.component.css'],
 })
-export class CreateScholarComponent {
+export class CreateScholarComponent implements OnInit {
   row = new ScholarDTO();
+  banks: any[] | undefined;
+  errorMessage: any;
 
   constructor(public router: Router, private scholarService: ScholarService) {}
 
+  ngOnInit(): void {
+    this.scholarService.getBanks().subscribe((banks: any) => {
+      this.banks = banks;
+    });
+  }
+
   onSubmit() {
     this.scholarService.createScholar(this.row).subscribe(
-      (response) => {
-        console.log(response);
+      () => {
+        this.closeModal();
       },
       (error) => {
-        console.error(error);
+        this.errorMessage = error.error.userMessage;
       }
     );
-    this.closeModal();
   }
 
   closeModal() {
