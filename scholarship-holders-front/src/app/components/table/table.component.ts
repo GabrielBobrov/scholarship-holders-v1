@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ScholarService } from '../services/scholar.service';
+import { ScholarService } from '../../services/scholar.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UpdateScholarComponent } from '../update-scholar/update-scholar.component';
 

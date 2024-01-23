@@ -1,7 +1,7 @@
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InitialPageComponent } from './initial-page/initial-page.component';
+import { InitialPageComponent } from './components/initial-page/initial-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/initial', pathMatch: 'full' },
